@@ -31,6 +31,8 @@ class Server {
 
 
             const number = req.query.number;
+            const artistName = req.query.artist;
+            const songGenre = req.query.genre;
 
             let run_query = null;
 
@@ -119,6 +121,22 @@ class Server {
                 run_query = `select albName,publishDate,name  
                 from album, artist
                 where album.artistID = artist.artistID;`;
+            } else if (number == 12) {
+                run_query = `select name, songName, songCategory, albName, publishDate
+                from artist, song, song_inside_album, album
+                where artist.artistID = album.artistID and
+                album.albID = song_inside_album.albID and
+                song.songID = song_inside_album.songID`;
+
+                if (!artistName.trim() === "") {
+                    run_query += `and name = "${artistName}"`;
+                }
+
+                if (!songGenre.trim() === "") {
+                    run_query += `and songCategory = "${songGenre}"`;
+                }
+
+                run_query += `;`;
             }
             
 
@@ -138,7 +156,7 @@ class Server {
     start() {
         // Start the server
         this.app.listen(this.port, () => {
-            console.log("Server is running on port ${this.port}");
+            console.log(`Server is running on port ${this.port}`);
         });
     }
 }
