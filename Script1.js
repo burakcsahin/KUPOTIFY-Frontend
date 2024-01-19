@@ -17,8 +17,8 @@ class Server {
         this.connection = mysql.createConnection({
             host: 'localhost',
             user: 'root',
-            password: 'hgaksd',
-            database: '306project',
+            password: 'berke61752',
+            database: '306schema',
         });
 
         // Initialize routes
@@ -43,8 +43,8 @@ class Server {
 
 
             if (number == 1) {
-            run_query =
-              `select a.artistid, a.name as artistname, count(s.songid) as songcount
+                run_query =
+                    `select a.artistid, a.name as artistname, count(s.songid) as songcount
               from artist a
               join album alb on a.artistid = alb.artistid
               join song_inside_album sia on alb.albid = sia.albid
@@ -53,34 +53,34 @@ class Server {
               group by a.artistid, a.name
               order by songcount desc;`;
             } else if (number == 2) {
-            run_query =
-              `select *
+                run_query =
+                    `select *
               from artist
               where substr(bdate, 1, 4) > '2000';`;
-            } else if (number == 3){
-            run_query =
-              `select a.name as favoriteartist, count(u.nickname) as usercount
+            } else if (number == 3) {
+                run_query =
+                    `select a.name as favoriteartist, count(u.nickname) as usercount
               from artist a
               join user u on a.name = u.favartist
               group by a.name
               order by usercount desc;`;
             } else if (number == 4) {
-            run_query =
-              `select favgenre, count(*) as genrecount
+                run_query =
+                    `select favgenre, count(*) as genrecount
               from user
               where sex = 'female'
               group by favgenre
               order by genrecount desc;`;
             } else if (number == 5) {
-            run_query =
-              `select favartist, count(*) as artistcount
+                run_query =
+                    `select favartist, count(*) as artistcount
               from user
               where year(bdate) > 2000
               group by favartist
               order by artistcount desc;`;
             } else if (number == 6) {
-            run_query =
-              `select
+                run_query =
+                    `select
               s.songname as mostlikedsong,
               count(l.nickname) as totallikes
               from
@@ -93,8 +93,8 @@ class Server {
               totallikes desc;
               `;
             } else if (number == 7) {
-            run_query =
-              `select
+                run_query =
+                    `select
               s.songid as mostlikedpopsongid,
               s.songname as mostlikedpopsong,
               count(l.nickname) as totallikes
@@ -109,10 +109,16 @@ class Server {
               order by
               totallikes desc;
               `;
-            } else { 
-              run_query = `SELECT *
-              FROM song
-              LIMIT 5;`;
+            } else if (number == 8) {
+                run_query = `select * from user;`;
+            } else if (number == 9) {
+                run_query = `select * from song;`;
+            } else if (number == 10) {
+                run_query = `select * from artist;`;
+            } else if (number == 11) {
+                run_query = `select albName,publishDate,name  
+                from album, artist
+                where album.artistID = artist.artistID;`;
             }
             
 
@@ -132,7 +138,7 @@ class Server {
     start() {
         // Start the server
         this.app.listen(this.port, () => {
-            console.log("Server is running on port ${ this.port }");
+            console.log("Server is running on port ${this.port}");
         });
     }
 }
