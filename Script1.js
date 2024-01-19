@@ -17,8 +17,8 @@ class Server {
         this.connection = mysql.createConnection({
             host: 'localhost',
             user: 'root',
-            password: 'berke61752',
-            database: '306schema',
+            password: 'MBesbardam123.',
+            database: 'comp306',
         });
 
         // Initialize routes
@@ -28,7 +28,6 @@ class Server {
     async initRoutes() {
         // Example API endpoint to fetch data from MySQL
         this.app.get('/api/data', (req, res) => {
-
 
             const number = req.query.number;
             const artistName = req.query.artist;
@@ -128,12 +127,13 @@ class Server {
                 album.albID = song_inside_album.albID and
                 song.songID = song_inside_album.songID`;
 
-                if (!artistName.trim() === "") {
-                    run_query += `and name = "${artistName}"`;
+                
+                if (!artistName.trim() == "") {
+                    run_query += ` and name = "${artistName}"`;
                 }
 
-                if (!songGenre.trim() === "") {
-                    run_query += `and songCategory = "${songGenre}"`;
+                if (!songGenre.trim() == "") {
+                    run_query += ` and songCategory = "${songGenre}"`;
                 }
 
                 run_query += `;`;
