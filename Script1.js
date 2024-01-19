@@ -138,6 +138,11 @@ class Server {
 
                 run_query += `;`;
             }
+
+            else if(number == 13){
+                run_query = `select distinct albName from album;`;
+
+            }
             
 
 
