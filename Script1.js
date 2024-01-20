@@ -17,8 +17,8 @@ class Server {
         this.connection = mysql.createConnection({
             host: 'localhost',
             user: 'root',
-            password: 'MBesbardam123.',
-            database: 'comp306',
+            password: 'berke61752',
+            database: '306schema',
         });
 
         // Initialize routes
@@ -140,7 +140,7 @@ class Server {
             }
 
             else if(number == 13){
-                run_query = `select distinct albName from album;`;
+                run_query = `select distinct albName from album order by albName;`;
 
             }
             
