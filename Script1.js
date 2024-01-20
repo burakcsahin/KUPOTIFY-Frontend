@@ -17,8 +17,8 @@ class Server {
         this.connection = mysql.createConnection({
             host: 'localhost',
             user: 'root',
-            password: 'berke61752',
-            database: '306schema',
+            password: 'MBesbardam123.',
+            database: 'comp306',
         });
 
         // Initialize routes
@@ -32,6 +32,10 @@ class Server {
             const number = req.query.number;
             const artistName = req.query.artist;
             const songGenre = req.query.genre;
+            const albName = req.query.albumName;
+            const songNameToInsert = req.query.songName;
+            const songGenreToInsert = req.query.genreToInsert;
+            const songID = req.query.songID;
 
             let run_query = null;
 
@@ -143,7 +147,20 @@ class Server {
                 run_query = `select distinct albName from album order by albName;`;
 
             }
+
+            else if(number == 14){
+                run_query = `insert into song(songID,songName,songCategory) values(${songID}, "${songNameToInsert}", "${songGenreToInsert}")`;
+            }
             
+            else if(number == 15){
+                run_query = `select max(songID) + 1 from song;`;
+            }
+
+            else if(number == 16){
+                run_query = `select albID from Album where albName = "${albName}"`;
+            }
+
+
 
 
             this.connection.query(run_query, (err, results) => {
