@@ -10,10 +10,10 @@ class Server {
         this.app = express();
         this.port = process.env.PORT || 3001;
 
-        // Enable CORS for all routes
+        
         this.app.use(cors());
 
-        // MySQL connection configuration
+        
         this.connection = mysql.createConnection({
             host: 'localhost',
             user: 'root',
@@ -21,12 +21,12 @@ class Server {
             database: '306schema',
         });
 
-        // Initialize routes
+        
         this.initRoutes();
     }
 
     async initRoutes() {
-        // Example API endpoint to fetch data from MySQL
+        
         this.app.get('/api/data', (req, res) => {
 
             const number = req.query.number;
@@ -39,15 +39,7 @@ class Server {
             const artistNameToFilter = req.query.artistNameToFilter;
             const albumID = req.query.albumID;
 
-            let run_query = null;
-
-            // if (number == 1) {
-            //     run_query = 'select country.code, country.name, city.name, city.population from country, city where country.code = city.countrycode and country.lifeexpectancy > 75 and country.population < 1000000;';
-            // }
-            // else {
-            //     run_query = 'select country.code, country.name, city.name, city.population from country, city where country.code = city.countrycode and country.lifeexpectancy > 80 and country.population < 1000000;';
-            // }
-
+            let run_query = null;           
 
             if (number == 1) {
                 run_query =
@@ -204,14 +196,13 @@ class Server {
         });
     }
 
-    start() {
-        // Start the server
+    start() {       
         this.app.listen(this.port, () => {
             console.log(`Server is running on port ${this.port}`);
         });
     }
 }
 
-// Create an instance of the Server class and start it
+
 const server = new Server();
 server.start();
