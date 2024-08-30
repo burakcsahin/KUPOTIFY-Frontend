@@ -1,0 +1,1 @@
+Frontend for our project KUPOTIFY: Koc University Spotify Admin Panel for the course COMP306: Database Management Systems. The admin panel supports operations such as adding, removing, editing songs, albums, artists etc with a simple wepbage GUI that resembles Spotify color palette.
